@@ -1,0 +1,113 @@
+{
+  "nameZh": "关涛",
+  "nameEn": "Tao Guan",
+  "email": "15520218265@163.com",
+  "github": "TaoGuan1998",
+  "siteUrl": "https://taoguan1998.github.io/",
+  "updated": "2026-10",
+  "papers": [
+    {
+      "id": "polyhedral",
+      "year": 2026,
+      "title": "Asymptotic Tracking for Full-State Coupled Polyhedral Constrained MIMO Nonlinear Systems",
+      "authors": "B. Li, T. Guan, X. Guan, Y. Song",
+      "journal": "IEEE Transactions on Automation Science and Engineering",
+      "short": "T-ASE",
+      "role": "co"
+    },
+    {
+      "id": "barrier",
+      "year": 2025,
+      "title": "Barrier Lyapunov Function-Based Asymptotic Tracking Control for Irregular Ellipsoidal Output Constraints",
+      "authors": "T. Guan, B. Li, Y. Song, G.-R. Duan",
+      "journal": "IEEE Transactions on Systems, Man, and Cybernetics: Systems",
+      "short": "TSMC",
+      "role": "first"
+    },
+    {
+      "id": "unwinding",
+      "year": 2025,
+      "title": "Fixed-Time Spacecraft Attitude Control With Unwinding-Free Performance",
+      "authors": "T. Guan, B. Li, Y. Song, G.-R. Duan",
+      "journal": "IEEE Transactions on Automatic Control",
+      "short": "TAC",
+      "role": "first"
+    },
+    {
+      "id": "quaternion",
+      "year": 2025,
+      "title": "Unified Performance Control of Spacecraft Attitude Tracking With Relaxed Quaternion Conditions",
+      "authors": "T. Guan, B. Li, Y. Song, G.-R. Duan",
+      "journal": "IEEE Transactions on Circuits and Systems I: Regular Papers",
+      "short": "TCAS-I",
+      "role": "first",
+      "doi": "10.1109/TCSI.2024.3484515"
+    },
+    {
+      "id": "predefined",
+      "year": 2025,
+      "title": "Predefined-Time and Predefined-Accuracy Sliding Mode Control With Unknown Bound Uncertainties",
+      "authors": "X. Guan, T. Guan*, K.-F. Cedric Yiu, B. Li, Y. Song",
+      "journal": "IEEE Transactions on Circuits and Systems I: Regular Papers",
+      "short": "TCAS-I",
+      "role": "corresponding"
+    },
+    {
+      "id": "advances",
+      "year": 2025,
+      "title": "Advances on Distributionally Robust Model Predictive Control",
+      "authors": "B. Li, T. Guan, X. Guan",
+      "journal": "Guidance, Navigation and Control",
+      "short": "GNC",
+      "role": "co"
+    },
+    {
+      "id": "optimal",
+      "year": 2024,
+      "title": "Optimal Fixed-Time Sliding Mode Control for Spacecraft Constrained Reorientation",
+      "authors": "B. Li, T. Guan, X. Guan, K. Zhang, K.-F. C. Yiu",
+      "journal": "IEEE Transactions on Automatic Control",
+      "short": "TAC",
+      "role": "co"
+    },
+    {
+      "id": "dro",
+      "year": 2024,
+      "title": "Distributionally Robust Model Predictive Control With Output Feedback",
+      "authors": "B. Li, T. Guan, L. Dai, G.-R. Duan",
+      "journal": "IEEE Transactions on Automatic Control",
+      "short": "TAC",
+      "role": "co",
+      "doi": "10.1109/TAC.2023.3321375"
+    },
+    {
+      "id": "finite",
+      "year": 2024,
+      "title": "指向约束下有限时间航天器姿态重定向控制",
+      "authors": "关涛, 李彬, 武云丽",
+      "journal": "空间控制技术与应用",
+      "short": "SCTA",
+      "role": "first",
+      "language": "zh",
+      "translation": "Finite-Time Spacecraft Attitude Reorientation Control Under Pointing Constraints"
+    },
+    {
+      "id": "adaptive",
+      "year": 2023,
+      "title": "Adaptive fixed-time sliding mode control for spacecraft reorientation with attitude pointing constraints and disturbance rejection",
+      "authors": "T. Guan, K. Zhang, B. Li, X. Guan, K.-F. Cedric Yiu",
+      "journal": "ISA Transactions",
+      "short": "ISA",
+      "role": "first"
+    },
+    {
+      "id": "output",
+      "year": 2023,
+      "title": "Output feedback attitude control for rigid spacecraft under attitude constraints",
+      "authors": "T. Guan, B. Li",
+      "journal": "Journal of Industrial and Management Optimization",
+      "short": "JIMO",
+      "role": "first"
+    }
+  ]
+}
