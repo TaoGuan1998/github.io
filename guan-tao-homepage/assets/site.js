@@ -13,6 +13,9 @@
       paper.hidden = !match;
       if (match) visible++;
     }
+    for (const group of document.querySelectorAll('.paper-year-group')) {
+      group.hidden = ![...group.querySelectorAll('.paper')].some(paper => !paper.hidden);
+    }
     count.textContent = `${visible} ${count.dataset.suffix}`;
     empty.hidden = visible !== 0;
   };
