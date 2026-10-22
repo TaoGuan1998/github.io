@@ -6,13 +6,10 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const data = JSON.parse(fs.readFileSync(path.join(root, 'content.json'), 'utf8'));
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const t = (lang, zh, en) => lang === 'zh' ? zh : en;
-const files = {home:'index.html', publications:'publications.html', background:'background.html'};
+const files = {home:'index.html', publications:'publications.html'};
 const icon = name => {
   const paths = {
     mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>',
-    control:'<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2" fill="currentColor"/><circle cx="15" cy="17" r="2" fill="currentColor"/>',
-    orbit:'<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-40 12 12)"/>',
-    chart:'<path d="M4 4v16h16M7 15l4-5 4 3 5-8"/>',
     github:'<path d="M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 0 0-1-2.7c3.3-.4 6.8-1.6 6.8-7.3a5.7 5.7 0 0 0-1.5-4 5.3 5.3 0 0 0-.1-4S18 0 15 2a13.4 13.4 0 0 0-6 0C6 0 4.8 0 4.8 0a5.3 5.3 0 0 0-.1 4 5.7 5.7 0 0 0-1.5 4c0 5.7 3.5 6.9 6.8 7.3A3.5 3.5 0 0 0 9 18v4"/>'
   };
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[name]+'</svg>';
@@ -20,12 +17,12 @@ const icon = name => {
 
 function sidebar(lang, page) {
   const prefix = lang === 'en' ? '../' : '';
-  const nav = {home:t(lang,'个人简介','About'),publications:t(lang,'论文发表','Publications'),background:t(lang,'教育与荣誉','Background')};
+  const nav = {home:t(lang,'个人简介','About'),publications:t(lang,'论文发表','Publications')};
   return '<header class="profile-sidebar"><a class="avatar" href="index.html"><img src="'+prefix+'assets/tao-guan.jpg" alt="关涛 / Tao Guan" width="227" height="227" fetchpriority="high"></a>'+
     '<h1 class="profile-name"><span class="profile-name-en">Tao Guan</span><span class="profile-name-divider"> · </span><span class="profile-name-zh" lang="zh-CN">关涛</span></h1>'+
     '<p class="profile-position">'+t(lang,'博士研究生 · 四川大学','Ph.D. Student @ Sichuan University')+'</p>'+
     '<p class="profile-education">'+t(lang,'硕士 · 四川大学<br>学士 · 东北大学','M.E. @ Sichuan University<br>B.E. @ Northeastern University')+'</p>'+
-    '<p class="profile-tagline">'+t(lang,'智能决策 · 约束控制 · 航天器','Decision-making · Control · Spacecraft')+'</p>'+
+    '<p class="profile-tagline">'+t(lang,'智能决策 · 约束控制','Decision-making · Constrained Control')+'</p>'+
     '<div class="profile-contact"><a class="profile-email" href="mailto:'+esc(data.email)+'">'+icon('mail')+esc(data.email)+'</a>'+
     '<div class="social-icons"><a href="https://github.com/'+esc(data.github)+'" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">'+icon('github')+'</a><a href="mailto:'+esc(data.email)+'" aria-label="'+t(lang,'发送邮件','Email')+'" title="'+t(lang,'发送邮件','Email')+'">'+icon('mail')+'</a></div></div>'+
     '<nav class="detail-nav" aria-label="'+t(lang,'主导航','Main navigation')+'">'+Object.entries(files).map(([key,file])=>'<a href="'+file+'"'+(key===page?' aria-current="page"':'')+'>'+nav[key]+'</a>').join('')+
@@ -60,7 +57,7 @@ function paperGroups(papers, lang) {
 
 function education(lang) {
   const items = [
-    ['2023.09 — 2027.06',t(lang,'博士研究生 · 航空宇航科学与技术','Ph.D. · Aeronautical and Astronautical Science and Technology'),t(lang,'四川大学','Sichuan University'),t(lang,'控制方向；预计 2027 年 6 月毕业','Control; expected graduation: June 2027')],
+    [t(lang,'2023.09 — 至今','Sep 2023 — Present'),t(lang,'博士研究生 · 航空宇航科学与技术','Ph.D. · Aeronautical and Astronautical Science and Technology'),t(lang,'四川大学','Sichuan University'),t(lang,'控制方向','Control')],
     ['2020.09 — 2023.06',t(lang,'硕士 · 电子信息','Master’s degree · Electronic Information'),t(lang,'四川大学','Sichuan University'),t(lang,'控制方向','Control')],
     ['2016.09 — 2020.06',t(lang,'学士 · 自动化','Bachelor’s degree · Automation'),t(lang,'东北大学','Northeastern University'),'']
   ];
@@ -81,25 +78,15 @@ function honors(lang) {
 
 function home(lang) {
   const bio = t(lang,
-    '我目前是<strong>四川大学</strong>航空宇航科学与技术专业的博士研究生，研究方向为<strong>复杂约束下的智能决策与控制</strong>，预计于 2027 年 6 月毕业。',
-    'I am a Ph.D. student in Aeronautical and Astronautical Science and Technology at <strong>Sichuan University</strong>. My research focuses on <strong>intelligent decision-making and control under complex constraints</strong>. I expect to graduate in June 2027.');
+    '我目前是<strong>四川大学</strong>航空宇航科学与技术专业的博士研究生，研究方向为<strong>复杂约束下的智能决策与控制</strong>。',
+    'I am a Ph.D. student in Aeronautical and Astronautical Science and Technology at <strong>Sichuan University</strong>. My research focuses on <strong>intelligent decision-making and control under complex constraints</strong>.');
   const bio2 = t(lang,
-    '我于 2023 年获得四川大学电子信息硕士学位，于 2020 年获得东北大学自动化学士学位。研究涉及受约束非线性控制、航天器姿态控制、固定时间与预设性能控制，以及分布鲁棒模型预测控制。',
-    'I received my master’s degree in Electronic Information from Sichuan University in 2023 and my bachelor’s degree in Automation from Northeastern University in 2020. My interests include constrained nonlinear control, spacecraft attitude control, fixed-time and prescribed-performance control, and distributionally robust model predictive control.');
-  const pillars = [
-    ['control',t(lang,'受约束非线性控制','Constrained Nonlinear Control'),t(lang,'复杂状态与输出约束 · 固定时间与预设性能控制','State and output constraints · Fixed-time and prescribed-performance control')],
-    ['orbit',t(lang,'航天器姿态控制','Spacecraft Attitude Control'),t(lang,'姿态跟踪与重定向 · 指向约束与抗退绕','Attitude tracking and reorientation · Pointing constraints and unwinding-free control')],
-    ['chart',t(lang,'分布鲁棒控制','Distributionally Robust Control'),t(lang,'模型预测控制 · 输出反馈','Model predictive control · Output feedback')]
-  ];
+    '我于 2023 年获得四川大学电子信息硕士学位，于 2020 年获得东北大学自动化学士学位。研究涉及受约束非线性控制、模型预测控制、高性能控制、强化学习、模仿学习、轨迹规划等。',
+    'I received my master’s degree in Electronic Information from Sichuan University in 2023 and my bachelor’s degree in Automation from Northeastern University in 2020. My research interests include constrained nonlinear control, model predictive control, high-performance control, reinforcement learning, imitation learning, and trajectory planning.');
   return '<h2 id="about">'+t(lang,'个人简介','About Me')+'</h2><p>'+bio+'</p><p>'+bio2+'</p>'+
-    '<h2 id="news">'+t(lang,'最新动态','Recent Highlights')+'</h2><div class="news-refinement"><ol class="news-list">'+
-    '<li class="highlight-item"><time class="highlight-date" datetime="2025-12">'+t(lang,'2025.12','Dec 2025')+'</time><span class="highlight-text">'+t(lang,'入选<strong>中国科协青年科技人才培育工程博士生专项计划</strong>，托举学会为中国自动化学会。','Selected for the <strong>CAST doctoral student talent development program</strong>, supported by the Chinese Association of Automation.')+'</span></li>'+
-    '<li class="highlight-item"><time class="highlight-date" datetime="2023-09">'+t(lang,'2023.09','Sep 2023')+'</time><span class="highlight-text">'+t(lang,'开始在<strong>四川大学</strong>攻读航空宇航科学与技术专业博士学位。','Began Ph.D. studies in Aeronautical and Astronautical Science and Technology at <strong>Sichuan University</strong>.')+'</span></li></ol></div>'+
-    '<h2 id="research">'+t(lang,'研究方向','Research Interests')+'</h2><p class="research-intro">'+t(lang,'面向复杂约束下的智能决策与控制，研究兼顾约束满足、收敛性能与不确定性的控制方法。','I study intelligent decision-making and control under complex constraints, with an emphasis on constraint satisfaction, convergence performance, and uncertainty.')+'</p>'+
-    '<div class="research-pillars">'+pillars.map(r=>'<article class="research-pillar"><span class="research-pillar-icon">'+icon(r[0])+'</span><h3>'+r[1]+'</h3><p>'+r[2]+'</p></article>').join('')+'</div>'+
-    '<h2 id="publications">'+t(lang,'论文发表','Publications')+'</h2><div class="publications">'+paperGroups(data.papers,lang)+'</div>'+
     '<h2 id="education">'+t(lang,'教育经历','Education')+'</h2>'+education(lang)+
     '<h2 id="honors">'+t(lang,'荣誉与奖励','Honors & Awards')+'</h2>'+honors(lang)+
+    '<h2 id="publications">'+t(lang,'论文发表','Publications')+'</h2><div class="publications">'+paperGroups(data.papers,lang)+'</div>'+
     '<h2 id="contact">'+t(lang,'联系方式','Contact')+'</h2><div class="contact-card"><p>'+t(lang,'欢迎围绕智能决策、受约束控制与航天器姿态控制开展学术交流。','I welcome discussions on intelligent decision-making, constrained control, and spacecraft attitude control.')+'</p><a href="mailto:'+esc(data.email)+'">'+esc(data.email)+'</a></div>';
 }
 
@@ -109,21 +96,23 @@ function publications(lang) {
     '<p class="result-count" id="result-count" aria-live="polite" data-suffix="'+t(lang,'篇论文','publications')+'">11 '+t(lang,'篇论文','publications')+'</p><div class="publications">'+paperGroups(data.papers,lang)+'</div><p class="empty-state" id="no-results" hidden>'+t(lang,'没有匹配的论文，请更换关键词或年份。','No matching publications. Try another keyword or year.')+'</p>';
 }
 
-function background(lang) {
-  return '<h2 id="education">'+t(lang,'教育经历','Education')+'</h2>'+education(lang)+'<h2 id="honors">'+t(lang,'荣誉与奖励','Honors & Awards')+'</h2>'+honors(lang);
-}
-
 for (const lang of ['zh','en']) {
   const prefix = lang==='en'?'../':'';
   for (const page of Object.keys(files)) {
-    const title = ({home:t(lang,'个人简介','About Me'),publications:t(lang,'论文发表','Publications'),background:t(lang,'教育与荣誉','Education & Honors')})[page]+' | '+t(lang,data.nameZh,data.nameEn);
+    const title = ({home:t(lang,'个人简介','About Me'),publications:t(lang,'论文发表','Publications')})[page]+' | '+t(lang,data.nameZh,data.nameEn);
     const desc=t(lang,'关涛，四川大学博士研究生。研究方向：复杂约束下的智能决策与控制、航天器姿态控制、分布鲁棒模型预测控制。','Tao Guan, Ph.D. student at Sichuan University. Research: intelligent decision-making and control under complex constraints, spacecraft attitude control, and distributionally robust MPC.');
     const url = new URL((lang==='en'?'en/':'')+(page==='home'?'':files[page]),data.siteUrl).href;
     const html='<!doctype html>\n<html lang="'+(lang==='zh'?'zh-CN':'en')+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><meta name="description" content="'+desc+'"><meta name="theme-color" content="#f7f8fb"><link rel="icon" href="'+prefix+'assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="'+prefix+'assets/style.css"><script src="'+prefix+'assets/site.js" defer></script><link rel="canonical" href="'+esc(url)+'"><link rel="alternate" hreflang="zh-CN" href="'+prefix+files[page]+'"><link rel="alternate" hreflang="en" href="'+prefix+'en/'+files[page]+'"><meta property="og:type" content="profile"><meta property="og:title" content="'+title+'"><meta property="og:description" content="'+desc+'"><meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+new URL('assets/tao-guan.jpg',data.siteUrl).href+'"></head>\n'+
-      '<body><a class="skip-link" href="#main">'+t(lang,'跳转到正文','Skip to content')+'</a><div class="wrapper">'+sidebar(lang,page)+'<main class="site-content" id="main" tabindex="-1">'+({home,publications,background})[page](lang)+'<footer class="site-footer"><p>© 2026 '+esc(t(lang,data.nameZh,data.nameEn))+' · '+t(lang,'四川大学','Sichuan University')+'</p></footer></main></div></body></html>\n';
+      '<body><a class="skip-link" href="#main">'+t(lang,'跳转到正文','Skip to content')+'</a><div class="wrapper">'+sidebar(lang,page)+'<main class="site-content" id="main" tabindex="-1">'+({home,publications})[page](lang)+'<footer class="site-footer"><p>© 2026 '+esc(t(lang,data.nameZh,data.nameEn))+' · '+t(lang,'四川大学','Sichuan University')+'</p></footer></main></div></body></html>\n';
     const dir=lang==='en'?path.join(root,'en'):root;
     fs.mkdirSync(dir,{recursive:true});
     fs.writeFileSync(path.join(dir,files[page]),html);
   }
+  // Retain old URLs as redirects so existing uploaded files need no manual deletion.
+  const dir=lang==='en'?path.join(root,'en'):root;
+  const target='index.html#education';
+  const canonical=new URL(lang==='en'?'en/':'',data.siteUrl).href;
+  const redirect='<!doctype html>\n<html lang="'+(lang==='zh'?'zh-CN':'en')+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url='+target+'"><link rel="canonical" href="'+esc(canonical)+'"><title>'+t(lang,'关涛 · 个人简介','Tao Guan · About Me')+'</title></head><body><p><a href="'+target+'">'+t(lang,'查看个人简介中的教育经历与荣誉奖励','View education and honors on the About page')+'</a></p></body></html>\n';
+  fs.writeFileSync(path.join(dir,'background.html'),redirect);
 }
-console.log('Built 6 bilingual pages using the reference sidebar layout.');
+console.log('Built 4 bilingual content pages and 2 legacy redirects.');
